@@ -1,7 +1,0 @@
-# /etc/conf.d/RTM_Linux : config file for /etc/init.d/RTM_Linux
-
-# The configuration file to use.
-RTM_LINUX_CFG="@sysconfdir@/RTM_Linux.cfg"
-
-# Any additional options (e.g. -n -4 -6) to pass to the RTM_Linux daemon.
-RTM_LINUX_OPTS=""

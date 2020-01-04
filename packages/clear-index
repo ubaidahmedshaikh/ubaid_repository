@@ -1,1 +1,0 @@
-@reboot root /usr/share/interceptor-api/clear-index.sh

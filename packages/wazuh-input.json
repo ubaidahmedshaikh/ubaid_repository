@@ -1,1 +1,0 @@
-{"user": "saiuser","password": "api-password","url": "https://127.0.0.1","port": "55000","manager": "manager-hostname","insecure": "true","active": true,"extensions": {"oscap": true, "audit": true, "pci": true}}

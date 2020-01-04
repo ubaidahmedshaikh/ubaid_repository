@@ -1,1 +1,0 @@
-*/5 * * * *  root   /usr/cf.monitoring_1.1/nagios-4.3.2.Appendix/mrtg-nagios_task.sh

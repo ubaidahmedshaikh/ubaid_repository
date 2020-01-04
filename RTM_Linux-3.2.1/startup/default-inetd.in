@@ -1,5 +1,0 @@
-#
-# Enable the following entry to enable the RTM_Linux daemon
-#RTM_Linux stream tcp nowait @RTM_Linux_user@ @sbindir@/RTM_Linux RTM_Linux -c @pkgsysconfdir@/RTM_Linux.cfg --inetd
-# Enable the following entry if the RTM_Linux daemon didn't link with libwrap
-#RTM_Linux stream tcp nowait @RTM_Linux_user@ /usr/sbin/tcpd @sbindir@/RTM_Linux -c @pkgsysconfdir@/RTM_Linux.cfg --inetd
