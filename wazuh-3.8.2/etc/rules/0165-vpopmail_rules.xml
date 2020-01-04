@@ -1,0 +1,66 @@
+<!--
+  -  vpopmail rules
+  -  Author: Daniel Cid.
+  -  Author: Ceg Ryan <cegryan ( at ) gmail.com>.
+  -  Updated by Wazuh, Inc.
+  -  Copyright (C) 2015-2019, Wazuh Inc.
+  -  Copyright (C) 2009 Trend Micro Inc.
+  -  This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2.
+-->
+
+<group name="syslog,vpopmail,">
+  <rule id="9900" level="0">
+    <decoded_as>vpopmail</decoded_as>
+    <description>Grouping for the vpopmail rules.</description>
+  </rule>
+
+  <rule id="9901" level="5">
+    <if_sid>9900</if_sid>
+    <match> password fail </match>
+    <group>authentication_failed,hipaa_164.308(a)(5)(II)(C),sox_302.4.B,pci_dss_10.2.4,hipaa_164.308(a)(4)(II)(C),pci_dss_10.2.5,gpg13_7.1,hipaa_164.308(a)(5)(II)(B),sox_302.5.A,sox_302.5.B,gdpr_IV_35.7.d,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+    <description>vpopmail: Login failed.</description>
+  </rule>
+
+  <rule id="9902" level="5">
+    <if_sid>9900</if_sid>
+    <match> vpopmail user not found </match>
+    <group>invalid_login,hipaa_164.308(a)(5)(II)(C),sox_302.4.B,pci_dss_10.2.4,hipaa_164.308(a)(4)(II)(C),pci_dss_10.2.5,gpg13_7.1,hipaa_164.308(a)(5)(II)(B),sox_302.5.A,sox_302.5.B,gdpr_IV_35.7.d,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+    <description>vpopmail: Attempt to login to vpopmail with invalid username.</description>
+  </rule>
+
+  <rule id="9903" level="5">
+    <if_sid>9900</if_sid>
+    <match> null password given </match>
+    <group>authentication_failed,hipaa_164.308(a)(5)(II)(C),sox_302.4.B,pci_dss_10.2.4,hipaa_164.308(a)(4)(II)(C),pci_dss_10.2.5,gpg13_7.1,hipaa_164.308(a)(5)(II)(B),sox_302.5.A,sox_302.5.B,gdpr_IV_35.7.d,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+    <description>vpopmail: Attempt to login to vpopmail with empty password.</description>
+  </rule>
+
+  <rule id="9904" level="3">
+    <if_sid>9900</if_sid>
+    <match> login success </match>
+    <group>authentication_success,hipaa_164.308(a)(4)(II)(C),sox_302.4.B,pci_dss_10.2.5,gpg13_7.1,gpg13_7.2,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+    <description>vpopmail: successful login.</description>
+  </rule>
+
+  <rule id="9951" level="10" frequency="10" timeframe="240">
+    <if_matched_sid>9901</if_matched_sid>
+    <same_source_ip />
+    <description>vpopmail: brute force (multiple failed logins).</description>
+    <group>authentication_failures,hipaa_164.308(a)(5)(II)(C),sox_302.4.B,pci_dss_10.2.4,hipaa_164.308(a)(4)(II)(C),pci_dss_10.2.5,hipaa_164.308(a)(5)(II)(B),pci_dss_11.4,gpg13_7.1,gdpr_IV_35.7.d,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+  </rule>
+
+  <rule id="9952" level="10" frequency="10" timeframe="240">
+    <if_matched_sid>9902</if_matched_sid>
+    <same_source_ip />
+    <description>vpopmail: brute force (email harvesting).</description>
+    <group>authentication_failures,hipaa_164.308(a)(5)(II)(C),sox_302.4.B,pci_dss_10.2.4,hipaa_164.308(a)(4)(II)(C),pci_dss_10.2.5,hipaa_164.308(a)(5)(II)(B),pci_dss_11.4,gpg13_7.1,gdpr_IV_35.7.d,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+  </rule>
+
+  <rule id="9953" level="10" frequency="10" timeframe="240">
+    <if_matched_sid>9903</if_matched_sid>
+    <same_source_ip />
+    <description>vpopmail: brute force (empty password).</description>
+    <group>authentication_failures,hipaa_164.308(a)(5)(II)(C),sox_302.4.B,pci_dss_10.2.4,hipaa_164.308(a)(4)(II)(C),pci_dss_10.2.5,hipaa_164.308(a)(5)(II)(B),pci_dss_11.4,gpg13_7.1,gdpr_IV_35.7.d,hipaa_164.308(a)(3)(II)(A),gdpr_IV_32.2,</group>
+  </rule>
+
+</group>

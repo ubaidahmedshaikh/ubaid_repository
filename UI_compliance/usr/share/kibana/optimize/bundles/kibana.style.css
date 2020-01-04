@@ -1,0 +1,14 @@
+/*! Copyright Elasticsearch B.V. and/or license to Elasticsearch B.V. under one or more contributor license agreements
+ * Licensed under the Elastic License; you may not use this file except in compliance with the Elastic License. */
+.homWelcome::before {
+  content: url(__REPLACE_WITH_PUBLIC_PATH__176bcca991b07a6ec908fc4d36ac5ae0.svg);
+}
+.homWelcome::after {
+  content: url(__REPLACE_WITH_PUBLIC_PATH__cc17a3dbad9fc4557b4d5d47a38fcc56.svg);
+}
+/**
+ * 1. Bring the line-height down or else this link expands its container when it becomes visible.
+ */
+ .timeFieldRefreshButton {
+  line-height: 1 !important; /* 1 */
+}

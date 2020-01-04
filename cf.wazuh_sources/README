@@ -1,0 +1,26 @@
+README for CF.Wazuh  
+Version 1.0
+September 2017
+
+The content of this tarball will be installed in /usr/cf.wazuh
+README
+Draft_Wazuh_Installation_and_Configuration.docx
+elastickstack.Appendix/
+Installer/
+Installing_aWazuhAgent_windows.asc
+
+ 
+Installer  contains the installation scripts 
+
+
+new_install_wazuh_controller_elastickstack.sh*
+
+new_install_elasticsearch_piece.sh*
+
+tasks_post_installation.sh*  explains the post nstalation tasks
+
+
+elastickstack.Appendix/ contains configuration files
+
+
+

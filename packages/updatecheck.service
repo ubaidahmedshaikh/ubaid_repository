@@ -1,0 +1,12 @@
+[Unit]
+Description=CISS Interceptor Update Check
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/share/kibana/optimize/bundles/updatecheck
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

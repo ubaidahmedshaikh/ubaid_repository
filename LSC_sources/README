@@ -1,0 +1,16 @@
+README for tarball LSCconnector.tar.gz
+version 1.0
+September 2017
+
+When  you untar LSCconnector.tar.gz, the content of it tarball will be decompress in:
+/usr/cf.synchronization
+
+Under /usr/cf.synchronization  will be created the following folders and files:
+
+LSC contains a  core of LSC syncronization project
+
+JRE contains the Java JRE 
+
+sync.Appendix  contains the configuration files and a mysql driver.
+
+Installer: containis a copy of the new_install_lsc_sync.sh installer script, that is which is the installer and configurator of this project.

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Person">
+
+      <select id="getPerson" resultClass="java.util.HashMap" parameterClass="java.util.Map">
+          Select
+                person.id AS uid,
+                person.firstname AS cn,
+                person.username AS givenname,
+                person.lastname AS sn,
+                person.mobilephone AS telephonenumber,
+                person.email AS mail
+                FROM userinfo person
+                WHERE person.email LIKE #mail#
+
+</select><insert id="insertPerson" parameterClass="java.util.Map">
+                insert into userinfo ( firstname, username, lastname, email, mobilephone,creationdate,updatedate)
+                values ( #cn#, #givenname#, #sn#, #mail# ,#telephonenumber#,now(),now() )
+        </insert><update id="updatePerson" parameterClass="java.util.Map">
+                update userinfo
+                   set firstname=#cn#, username=#givenname#, lastname=#sn# , mobilephone=#telephonenumber#
+                 where email = #mail#
+        </update><delete id="deletePerson" parameterClass="java.util.Map">
+                delete from userinfo where email = #mail#
+        </delete><select id="getPersonList" resultClass="java.util.HashMap">
+                select p.email AS mail from userinfo p
+        </select>
+
+
+</sqlMap>

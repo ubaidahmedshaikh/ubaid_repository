@@ -1,0 +1,66 @@
+#######################################################################################
+######  Installation Controller and Elasticstack                     ##################
+#####  Septiembre 2017                                               ##################
+#######################################################################################
+
+#######################################################################################
+# These steps have to be done by hand, it is not possible to automate it using a script.
+#######################################################################################
+
+Please review follow  documents:
+Wazuh Installation and Configuration-1.0.docx
+Install Wazuh Agent on Windows-1.0.docx
+Detecting USB devices with Wazuh.doc
+
+ A) Run the  Wizard to create user and password and certificate to add API to Kibana 
+  /var/ossec/api/scripts/configure_api.sh
+
+  B) Connecting the Wazuh App with the API   ( See the document "Draft  Wazuh Installation and Configuration.docx": Section: #Connect the Wazuh App with the API)
+
+ C) Register the Agens and export the key:
+ /var/ossec/bin/manage_agents
+
+
+
+#########   Here a example     ########
+
+****************************************
+* Wazuh v2.0 Agent manager.            *
+* The following options are available: *
+****************************************
+   (A)dd an agent (A).
+   (E)xtract key for an agent (E).
+   (L)ist already added agents (L).
+   (R)emove an agent (R).
+   (Q)uit.
+Choose your action: A,E,L,R or Q:
+Press A and Enter to add an agent. Youâ€™ll be asked for the agentâ€™s name (use the agent hostname or another arbitrary #name), its IP and the agent ID (you can leave this field empty to auto-assign an ID).
+In this example, we will Add an agent with name Example, dynamic IP (any) and automatic ID:
+
+Choose your action: A,E,L,R or Q: A
+
+ Adding a new agent (use '\q' to return to the main menu).
+  Please provide the following:
+   * A name for the new agent: Example
+   * The IP Address of the new agent: any
+   * An ID for the new agent[001]:
+Agent information:
+   ID:001
+   Name:Example
+   IP Address:any
+
+Confirm adding it?(y/n): y
+Agent added with ID 001.
+Extract the new agent key. You will need it for the agent:
+
+Choose your action: A,E,L,R or Q: E
+
+
+Available agents:
+   ID: 001, Name: Example, IP: any
+Provide the ID of the agent to extract the key (or '\q' to quit): 001
+
+Agent key information for '001' is:
+MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
+Exit from manage_agents by pressing Q and Enter.
+

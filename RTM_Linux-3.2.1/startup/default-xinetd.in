@@ -1,0 +1,15 @@
+# default: off
+# description: RTM_LINUX (Nagios Remote Plugin Executor)
+service RTM_Linux
+{
+    disable         = yes
+    socket_type     = stream
+    port            = @RTM_Linux_port@
+    wait            = no
+    user            = @RTM_Linux_user@
+    group           = @RTM_Linux_group@
+    server          = @sbindir@/RTM_Linux
+    server_args     = -c @pkgsysconfdir@/RTM_Linux.cfg --inetd
+    only_from       = 127.0.0.1
+    log_on_success  = 
+}

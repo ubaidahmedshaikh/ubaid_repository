@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<lsc revision="0" xmlns="http://lsc-project.org/XSD/lsc-core-2.1.xsd">
+ <connections>
+<!--  
+        ./connection Connection node, include definition of the required parameters.
+                                        Depending on the connection type, properties vary.
+                                        Existing class type are : ldapConnection, databaseConnnection
+                                        Plugins also provides : nisConnection, jndiExecDstConnection
+-->
+    <ldapConnection>
+      <name>ldap-conn</name>
+<!--  ./url mandatory, the JNDI URL -->
+      <url>ldap://localhost:389/dc=cyberforza,dc=com</url>
+<!--  ./username mandatory, the DN to bind with -->
+      <username>cn=admin,dc=cyberforza,dc=com</username>
+<!--  ./password mandatory, credentials to bind with -->
+      <password>administrator</password>
+<!--  ./authentication mandatory, must contain either ANONYMOUS, SIMPLE, SASL, GSSAPI or DIGEST_MD5 -->
+      <authentication>SIMPLE</authentication>
+<!--  ./referral mandatory, must contain either IGNORE, THROUGH, THROW or FOLLOW -->
+      <referral>IGNORE</referral>
+<!--  ./derefAliases mandatory, must contain either NEVER, SEARCH, FIND, ALWAYS -->
+      <derefAliases>NEVER</derefAliases>
+<!--  ./version mandatory, must contain either VERSION_2, VERSION_3 -->
+      <version>VERSION_3</version>
+<!--  ./pageSize optional, specify the paged size when searching -->
+      <pageSize>-1</pageSize>
+<!--  ./factory mandatory, points to LDAP Context Factory, com.sun.jndi.ldap.LdapCtxFactory for a SUN JDK -->
+      <factory>com.sun.jndi.ldap.LdapCtxFactory</factory>
+<!--  ./tlsActivated optional, specify if SSL/TLS is activated to connect to the LDAP server -->
+      <tlsActivated>false</tlsActivated>
+    </ldapConnection>
+
+
+    <databaseConnection>
+<!--  ./name identify the connection according to its node number, used in the 
+                                        service node to specify the source or destination connection -->
+      <name>mysql-conn</name>
+<!--  ./url mandatory, the JDBC URL -->
+<url>jdbc:mysql://localhost:3306/radius</url>
+<!--  ./username mandatory, the JDBC username -->
+      <username>root</username>
+<!--  ./password mandatory, the JDBC credential -->
+      <password>radius123</password>
+<!--  ./driver mandatory, the Java classname to use as JDBC driver -->
+ <driver>com.mysql.jdbc.Driver</driver>
+<!--  ./otherSettings optional, may contain the list of complementary values, passed to the JDBC driver
+          <otherSettings>
+                <entry><key><value></entry>
+          </otherSettings> -->
+    </databaseConnection>
+  </connections>
+
+<tasks>
+<task>
+<name>insert</name>
+<bean>org.lsc.beans.SimpleBean</bean>
+<ldapSourceService>
+<name>ldap-insert-service</name>
+<connection reference="ldap-conn"/>
+<baseDn>dc=cyberforza,dc=com</baseDn>
+<pivotAttributes>
+<string>mail</string>
+</pivotAttributes>
+<fetchedAttributes>
+<string>cn</string>
+<string>givenname</string>
+<string>sn</string>
+<string>telephonenumber</string>
+<string>mail</string>
+</fetchedAttributes>
+<getAllFilter>(objectClass=inetorgPerson)</getAllFilter>
+<getOneFilter>(&amp;(objectClass=inetorgPerson)(mail={mail}))</getOneFilter>
+<cleanFilter>(&amp;(objectClass=inetorgPerson)(mail={mail}))</cleanFilter>
+</ldapSourceService>
+<databaseDestinationService>
+<name>mysql-insert-service</name>
+<connection reference="mysql-conn"/>
+<requestNameForList>getPersonList</requestNameForList>
+<requestNameForObject>getPerson</requestNameForObject>
+<requestsNameForInsert>
+<string>insertPerson</string>
+</requestsNameForInsert>
+<requestsNameForUpdate>
+<string>updatePerson</string>
+</requestsNameForUpdate>
+<requestsNameForDelete>
+<string>deletePerson</string>
+</requestsNameForDelete>
+</databaseDestinationService>
+<propertiesBasedSyncOptions>
+<mainIdentifier>"mail="+srcBean.getDatasetFirstValueById("mail") + ",dc=cyberforza,dc=com"</mainIdentifier>
+<defaultDelimiter>;</defaultDelimiter>
+<defaultPolicy>FORCE</defaultPolicy>
+<conditions>
+<create>true</create>
+<update>false</update>
+<delete>true</delete>
+<changeId>false</changeId>
+</conditions>
+</propertiesBasedSyncOptions>
+</task>
+<task>
+<name>update</name>
+<bean>org.lsc.beans.SimpleBean</bean>
+<ldapSourceService>
+<name>ldap-update-service</name>
+<connection reference="ldap-conn"/>
+<baseDn>dc=cyberforza,dc=com</baseDn>
+<pivotAttributes>
+<string>mail</string>
+</pivotAttributes>
+<fetchedAttributes>
+<string>cn</string>
+<string>givenname</string>
+<string>sn</string>
+<string>telephonenumber</string>
+<string>mail</string>
+</fetchedAttributes>
+<getAllFilter>(objectClass=inetorgperson)</getAllFilter>
+<getOneFilter>(&amp;(objectClass=inetorgperson)(mail={mail}))</getOneFilter>
+<cleanFilter>(&amp;(objectClass=inetorgperson)(mail={mail}))</cleanFilter>
+</ldapSourceService>
+<databaseDestinationService>
+<name>mysql-update-service</name>
+<connection reference="mysql-conn"/>
+<requestNameForList>getPersonList</requestNameForList>
+<requestNameForObject>getPerson</requestNameForObject>
+<requestsNameForInsert>
+<string/>
+</requestsNameForInsert>
+<requestsNameForUpdate>
+<string>updatePerson</string>
+</requestsNameForUpdate>
+<requestsNameForDelete>
+<string/>
+</requestsNameForDelete>
+</databaseDestinationService>
+<propertiesBasedSyncOptions>
+<mainIdentifier>"mail="+srcBean.getDatasetFirstValueById("mail")</mainIdentifier>
+<defaultDelimiter>;</defaultDelimiter>
+<defaultPolicy>FORCE</defaultPolicy>
+<conditions>
+<update>true</update>
+<changeId>false</changeId>
+</conditions>
+<dataset>
+<name>objectClass</name>
+<policy>KEEP</policy>
+<createValues>
+<string>"inetOrgPerson"</string>
+<string>"organizationalPerson"</string>
+<string>"person"</string>
+<string>"top"</string>
+</createValues>
+</dataset>
+<dataset>
+<name>telephone</name>
+<policy>FORCE</policy>
+<forceValues>
+<string>"telephonenumber="+srcBean.getDatasetFirstValueById("telephonenumber")</string>
+</forceValues>
+</dataset>
+</propertiesBasedSyncOptions>
+</task>
+</tasks>
+<!-- ./security This mandatory node contains the security settings used by LSC -->
+  <security>
+<!-- ./encryption This optional node contains the encryption settings -->
+    <encryption>
+<!--  ./keyfile This optional node contains the keyfile location -->
+      <keyfile>etc/lsc.key</keyfile>
+<!--  ./algorithm This optional node contains the encryption algorithm -->
+      <algorithm>AES</algorithm>
+<!--  ./strength This optional node contains the algorithm key length -->
+      <strength>128</strength>
+    </encryption>
+  </security>
+</lsc>

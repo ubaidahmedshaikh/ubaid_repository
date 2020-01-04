@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Copyright (c) 2016 Nagios(R) Core(TM) Development Team
+#
+# Start/stop the RTM_Linux daemon.
+
+RTM_LINUX_BIN=@sbindir@/RTM_Linux
+RTM_LINUX_CFG=@pkgsysconfdir@/RTM_Linux.cfg
+PID_FILE=@piddir@/RTM_Linux.pid
+
+test -x $RTM_LINUX_BIN || exit 0
+
+case "$1" in
+
+start)
+	echo -n "Starting nagios remote plugin daemon: RTM_Linux"
+	start-stop-daemon --start --quiet --pidfile $PID_FILE --exec $RTM_LINUX_BIN -- -c $RTM_LINUX_CFG -d
+	echo "." 
+	;;
+
+stop)
+	echo -n "Stopping nagios remote plugin daemon: RTM_Linux"
+	start-stop-daemon --stop --quiet --pidfile $PID_FILE --exec $RTM_LINUX_BIN
+	echo "."
+	;;
+
+restart|force-reload)
+	echo -n "Restarting nagios remote plugin daemon: RTM_Linux"
+	start-stop-daemon --stop --quiet --pidfile $PID_FILE --exec $RTM_LINUX_BIN
+	start-stop-daemon --start --quiet --pidfile $PID_FILE --exec $RTM_LINUX_BIN -- -c $RTM_LINUX_CFG -d
+	echo "."
+	;;
+
+reload)
+	echo -n "Reloading configuration files for nagios remote plugin daemon: RTM_Linux"
+	test -f $PID_FILE || exit 0
+	test -x /bin/kill && /bin/kill -HUP `cat $PID_FILE`
+	echo "."
+	;;
+
+*)
+	echo "Usage: $0 start|stop|restart|reload|force-reload"
+	exit 1 
+	;;
+esac
+
+exit 0

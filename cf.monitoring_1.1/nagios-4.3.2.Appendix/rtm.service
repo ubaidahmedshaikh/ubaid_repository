@@ -1,0 +1,19 @@
+[Unit]
+
+Description=RTM
+
+BindTo=network.target
+
+[Install]
+
+WantedBy=multi-user.target
+
+[Service]
+
+User=rtm
+
+Group=rtm
+
+Type=simple
+
+ExecStart=/usr/local/rtm/bin/rtm /usr/local/rtm/etc/rtm.cfg

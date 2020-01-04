@@ -1,0 +1,68 @@
+#!/bin/bash
+#Usage - Pass a space list as first parameter and output directory as second parameter 
+#Sample entry in file --> 192.168.50.10 agent1
+#                         192.168.40.10 agent2
+#Example ./key-gen input_list /var/ossec/etc
+#Tested with Wazuh 3.8
+test "$#" == "0" && (echo Please specify the list as parameter; exit)
+
+echo "Reading file $1";
+agent_ip_address="0";
+agent_name="0";
+i=0;
+
+rm $2/keys
+touch $2/keys
+#echo "Agent_IP Agent_Name Agent_ID Key" >> $2/keys
+#echo "" >> $2/keys
+apt-get install -y jq
+count=0
+while IFS='' read -r line || [[ -n "$line" ]];
+do
+	for word in $line;
+
+	##First word is ip, second agent name
+	do
+		if [ "$i" -eq "0" ];
+		then
+			#echo "ip  $word";
+			agent_ip_address=$word;
+			#echo -n "$agent_ip_address " >> $2/keys
+			#echo -n "   "
+			i=1;
+		else
+			agent_name=$word
+			i=0;
+			#echo -n "$agent_name " >> $2/keys
+		fi
+
+
+
+	done
+((count++))
+ID=0;
+echo "{\"name\" : \"$agent_name\", \"ip\" : \"$agent_ip_address\"} " > agent_info.json
+#cat agent_info.json | curl -u saiuser:sai123 -k -X POST "https://127.0.0.1:55000/agents" -H "Content-Type:application/json" -d @- | jq -r ".data.id" > output_of_add
+KEY=$(cat agent_info.json | curl -u saiuser:sai123 -k -X POST "https://127.0.0.1:55000/agents" -H "Content-Type:application/json" -d @- | jq -r ".data.key")
+#if [ `cat output_of_add` == "null" ];
+#     then
+#		echo "Agent name already exists" >> $2/keys
+#		continue;
+     #else
+		#cat output_of_add >> $2/keys
+#fi
+#ID=$(cat output_of_add)
+
+#KEY=$(curl -u saiuser:sai123 -k "https://127.0.0.1:55000/agents/$ID/key" | jq -r ".data.key")  #>> $2/keys
+#echo $KEY
+
+#echo "" >> $2/keys
+
+#echo "------------------------------------------" >> $2/keys
+jq -n -c  --arg name "$agent_name" --arg ip "$agent_ip_address" --arg key "$KEY" '{"agentName":$name,"agentIp":$ip,"agentKey":$key}' >> $2/keys
+#date
+done < "$1"
+#rm agent_info.json output_of_add
+rm agent_info
+echo "File read"
+echo $count

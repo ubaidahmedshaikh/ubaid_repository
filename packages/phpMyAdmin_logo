@@ -1,0 +1,3 @@
+@reboot root /usr/share/phpmyadmin/phpMyAdmin_logo.sh
+
+

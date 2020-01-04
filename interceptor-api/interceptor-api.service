@@ -1,0 +1,13 @@
+[Unit]
+Description=Interceptor API
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/usr/share/interceptor-api
+ExecStart=/usr/share/interceptor-api/start-api.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,78 @@
+                <div id="header">
+
+	<!--                <h1><a href="index.php"> <img src="images/daloradius_small.png" border=0/ style="width:250px;"></a></h1>
+
+			<h2>
+			
+			<? echo $l['all']['copyright1']; ?>
+			
+</h2>
+-->
+			<ul id="nav" style="background:#1e406d;">
+			<a name='top'></a>
+
+<li class="dropdown" style="height:55px;width:139px;margin:-3px -4px;"><a href="index.php"> <img src="images/default-logo.png" border=0/ style="width:118px;margin:0px;"></a></li>
+<a></a>
+
+<li class="dropdown" style="margin:0px 80px;">
+<button class="dropbtn">Management
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-content" style="min-width: 162px;">
+ <a href="mng-main.php">Management</a>
+<a href="mng-users.php">Users</a>
+   <a href="mng-rad-nas.php">Nas</a>
+   <a href="mng-rad-usergroup.php">User-Groups</a>
+  <a href="mng-rad-profiles.php">Profiles</a>
+ <a href="mng-rad-attributes.php">Attributes</a>
+ <a href="mng-rad-realms.php">Realms/Proxys </a>
+     </ul> 
+</li>
+<li class="dropdown" style="margin:0px -70px;">
+<button class="dropbtn">Reports
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-content" style="min-width:115px;">
+ <a href="rep-main.php">Reports</a>
+<a href="rep-main.php">General</a>
+   <a href="rep-logs.php">Logs</a>
+   <a href="rep-status.php">Status</a>
+     </ul>
+
+</li>
+ <li class="dropdown" style="margin:0px 50px;">
+<button class="dropbtn">Configuration
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-content" style="min-width: 168px;">
+  <a href="config-main.php">General</a>
+           <a href="config-reports.php">Reporting</a>
+             <a href="config-maint.php">Maintenance</a>
+          <a href="config-operators.php">Operators</a>
+          <a href="config-backup.php">Backup</a>     
+</ul>
+</li>
+<li class="dropdown" style="margin:0px -25px;">
+<button class="dropbtn"> Choose Database
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-content" style="min-width: 202px;">
+<a href="http://127.0.0.1/CyberInterceptorDB/">Radius Database</a>
+  <a href="http://127.0.0.1/CyberInterceptorAdmin/index.php?cmd=login_form">LDAP Database</a>
+</ul>
+</li>
+ <li class="dropdown" style="margin:0px 54px;">
+<button class="dropbtn">Monitoring 
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-content" style="min-width: 143px;">
+  <a href="gis-main.php">GIS</a>
+ <a href="http://127.0.0.1:5601/app/kibana/">Therat Analytics</a>
+<a href="http://127.0.0.1/RealTimeMonitoring/">RealTimeMonitoring</a>
+</ul>
+</li>
+ <li class="dropdown" style="margin:13px -23px;"><a href="help-main.php" style="font-weight:bold;" <?php echo ($m_active == "Help") ? "class=\"active\"" : ""?>><?php echo $l['menu']['Help']; ?></a></li>
+ <li> <form action="mng-search.php"> <input name="username" value="Search" /> </form></li>
+
+                                </ul>
+

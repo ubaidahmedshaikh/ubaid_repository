@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css "crossorigin="anonymous">
+<style>
+.pointer {cursor:pointer;}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    background-color: #2681dc;
+	border: 1px solid #dddddd;
+	text-align: left;
+	color: white;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #ADD8E6;
+}
+</style>
+<script>
+function toggle() {
+ if( document.getElementById("hidethis").style.display=='none' ){
+   document.getElementById("hidethis").style.display = 'table-row';
+  // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis").style.display = 'none';
+ }
+
+ if( document.getElementById("hidethis11").style.display=='none' ){
+   document.getElementById("hidethis11").style.display = 'table-row';
+  // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis11").style.display = 'none';
+ }
+}
+
+function toggle1() {
+ if( document.getElementById("hidethis1").style.display=='none' ){
+   document.getElementById("hidethis1").style.display = 'table-row'; // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis1").style.display = 'none';
+ }
+ if( document.getElementById("hidethis2").style.display=='none' ){
+   document.getElementById("hidethis2").style.display = 'table-row'; // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis2").style.display = 'none';
+ }
+ if( document.getElementById("hidethis3").style.display=='none' ){
+   document.getElementById("hidethis3").style.display = 'table-row'; // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis3").style.display = 'none';
+ }
+ if( document.getElementById("hidethis4").style.display=='none' ){
+   document.getElementById("hidethis4").style.display = 'table-row'; // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis4").style.display = 'none';
+ }
+ 
+}
+
+function toggle2() {
+ if( document.getElementById("hidethis5").style.display=='none' ){
+   document.getElementById("hidethis5").style.display = 'table-row'; // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis5").style.display = 'none';
+ }
+ if( document.getElementById("hidethis6").style.display=='none' ){
+   document.getElementById("hidethis6").style.display = 'table-row'; // set to table-row instead of an empty string
+ }else{
+   document.getElementById("hidethis6").style.display = 'none';
+ }
+ 
+ 
+}
+</script>
+</head>
+<body>
+
+<h1 style="text-align:center;">SOX SECURITY REGULATORY COMPLIANCE</h1>
+
+
+<p>The Sarbanes-Oxley Act (SOX) is Federal law for all publicly held USA corporations,
+and establishes extensive civil and criminal penalties for non-compliance.
+The main intention of SOX is to establish verifiable security controls to protect against
+disclosure of confidential data, and tracking of personnel to detect data tampering that
+may be fraud related. The central purpose of the act is to reduce fraud, build public
+confidence and trust, and protect data that may affect companies and shareholders. </p>
+
+<h3>Principle SOX Security Requirements</h3>
+<p>The two principle sections that relate to security are Section 302 and Section 404,
+summarized below:
+<ul><li><b>Section 302</b> This section is intended to safeguard against faulty financial
+reporting. As part of this section, companies must safeguard their data
+responsibly so as to ensure that financial reports are not based upon faulty data,
+tampered data, or data that may be highly inaccurate.</li>
+
+<li><b>Section 404</b> This section requires the safeguards stated in Section 302 (as well
+as other sections) to be externally verifiable by independent auditors, so that
+independent auditors may disclose to shareholders and the public possible
+security breaches that affect company finances. Specifically, this section
+guarantees that the Operational Control and the security of data cannot be hidden from auditors, and security
+breaches must be reported.</li></ul>
+<table>
+  <tr>
+    <th onClick="toggle();" class="pointer">Data Protection</th>
+    
+  </tr>
+  <tr id="hidethis" style="display:none;">
+    <td>
+	<a href="http://192.168.50.117:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-5y,mode:quick,to:now))&_a=(columns:!(_source),index:'interceptor-alerts-*',interval:auto,query:(language:lucene,query:'rule.sox:%22302.2%22'),sort:!('@timestamp',desc))">
+	Section 302.2-Safeguards to Prevent Data Tampering</a></td>
+    <td>This section of SOX requires that the signing officer must attest to the
+validity of reported information. Safeguards must exist to prevent tampering with data,
+so that data is verifiably true. </td>
+  </tr>
+  
+  <tr id="hidethis11" style="display:none;">
+  <td>
+  <a href="http://192.168.50.117:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-5y,mode:quick,to:now))&_a=(columns:!(_source),index:'interceptor-alerts-*',interval:auto,query:(language:lucene,query:'rule.sox:%22302.4.B%22'),sort:!('@timestamp',desc))">
+  Section 302.4.B-Controls to Track Data Access</a></td>
+  <td>This section of SOX requires internal controls over data, so that officers
+are aware of all relevant data. Data must exist in an internally controlled and verifiably
+secure framework.</td>
+  </tr>
+  
+  <tr>
+    <th onClick="toggle1();" class="pointer">Operational Control</th>
+  </tr>
+  <tr id="hidethis1" style="display:none;">
+    <td>
+	<a href="http://192.168.50.117:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-5y,mode:quick,to:now))&_a=(columns:!(_source),index:'interceptor-alerts-*',interval:auto,query:(language:lucene,query:'rule.sox:%22302.4.C%22'),sort:!('@timestamp',desc))">
+	Section 302.4.C-Operational Safeguards</a></td>
+	<td>This section of SOX requires that officers have evaluated the effectiveness
+of the internal controls as of a date within 90 days prior to the report. The security
+framework must be periodically reviewed and verified.</td>
+  </tr>
+			
+			
+     
+  <tr>
+  <th onClick="toggle2();" class="pointer">Breach Detection</th>
+  </tr>
+			<tr id="hidethis5" style="display:none;">
+			<td>
+			<a href="http://192.168.50.117:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-5y,mode:quick,to:now))&_a=(columns:!(_source),index:'interceptor-alerts-*',interval:auto,query:(language:lucene,query:'rule.sox:%22302.5.A%22%20%7C%7C%20rule.sox:%22302.5.B%22'),sort:!('@timestamp',desc))">
+			Section 302.5.A&B-Detect Security Breaches</a></td>
+			
+			<td>This subsection requires that security breaches (either due to flaws in the control system, the
+security system, or due to fraud) be detected. </td>
+			</tr>
+			
+			
+</table>
+
+</body>
+</html>

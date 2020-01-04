@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+#
+# Copyright (c) 2017 RTM(R) Core(TM) Development Team
+#
+
+command="@sbindir@/RTM_Linux"
+command_args="--config=${RTM_LINUX_CFG} ${RTM_LINUX_OPTS}"
+command_args_background="--daemon"
+description="RTM Remote Plugin Executor (RTM_LINUX) daemon"
+extra_started_commands="reload"
+pidfile="@piddir@/RTM_Linux.pid"
+
+reload() {
+    ebegin "Reloading ${SVCNAME}"
+    start-stop-daemon --signal HUP --pidfile "${pidfile}"
+    eend $?
+}

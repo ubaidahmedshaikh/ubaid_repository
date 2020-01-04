@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lan="en">
+
+<head>
+  <title>CyberForza</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-cookies.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js";></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css "crossorigin="anonymous">
+  
+  <script src="vA.js"></script>
+  <style>
+  .xyz {
+    background-color: gray;
+    border: black;
+    color: black;
+    //padding: 32px 64px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size:20px;
+    color: white;
+}
+
+input.tempScanCheckBox
+{
+	width: 20px;
+	height: 20px;
+}
+  </style>
+</head>
+
+<body class="text-center">
+<div class="container" ng-app="testApp" ng-controller="testController">
+  <form class="form-signin" autocomplete="on">
+    
+	<h4>Vulnerability Assessment</h4>
+  <br><p>Enter IP Address/Domain Name:<br>Example: domainname, 192.168.50.168, 10.0.0.200, example.com</p>
+  <br<p>Please limit to 10 entries per scan</p>
+   <p><textarea ng-model="myTextArea" style="height:200px; width:500px;" ng-model="clearAll">{{ response }}</textarea>
+ 
+
+   </p> 
+<script>
+        function enableButton2() {
+            document.getElementById("button2").disabled = false;
+			
+        }
+		
+		
+    </script>
+
+  <p> <button id = "button1" class = "btn btn-primary " ng-model="myVar" ng-click="addRequest()">Add IP/Domain Name</button>
+    
+	&nbsp;<button id = "button2" class = "btn btn-primary"  ng-click="getRequest()">Scan</button>
+	<p><br><input type="checkbox" class="checkbox" style="size:20" ng-model="checkData" value="one" ng-change="changeData()" ng-click="checkBoxaction" ng-checked="checkedListStatus()"> <b>Perform Temporary Scan</b> </p>
+	<br><a button id = "resultsButton" class = "btn btn-secondary" href="http://192.168.50.117:8080/index.php" >View Results</a>
+	<br><a button id = "refreshButton" class = "btn btn-secondary" ng-click="refreshStatus()">Refresh scan status</a>
+	</p>
+  
+  <p><b>{{ status2 }}</b><br><b>{{ response0 }}</p>
+</form>
+
+</div>
+
+</body>
+</html>
