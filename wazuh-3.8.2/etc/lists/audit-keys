@@ -1,5 +1,0 @@
-audit-threatanalytics-w:write
-audit-threatanalytics-r:read
-audit-threatanalytics-a:attribute
-audit-threatanalytics-x:execute
-audit-threatanalytics-c:command
